@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.1.1">
+  <diagram name="Page-1" id="yQkcE21j24u9J-cS1YJt">
+    <mxGraphModel dx="1032" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GZKspyNicU68e6l3w8ZS-39" edge="1" parent="1" source="GZKspyNicU68e6l3w8ZS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="GZKspyNicU68e6l3w8ZS-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-41" edge="1" parent="1" source="GZKspyNicU68e6l3w8ZS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="GZKspyNicU68e6l3w8ZS-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="121" />
+              <mxPoint x="389" y="121" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-2" parent="1" style="fillColorStyles=neutralFill;neutralFill=#9DA6A8;shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#EDEDED;strokeColor=#000000;gradientColor=#5B6163;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.router;network2IconXOffset=0.0001;network2IconYOffset=-0.1142;network2IconW=1;network2IconH=0.5485;" value="Routeur 192.168.1.254" vertex="1">
+          <mxGeometry height="35.65" width="65" x="351" y="162.58" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-5" parent="1" style="shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#EDEDED;strokeColor=#000000;gradientColor=#5B6163;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.globe;network2IconW=1;network2IconH=1;" value="Internet" vertex="1">
+          <mxGeometry height="50" width="50" x="364" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-8" parent="1" style="fillColorStyles=neutralFill;neutralFill=#9DA6A8;shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#EDEDED;strokeColor=#000000;gradientColor=#5B6163;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.nas_filer;network2IconW=1;network2IconH=0.62;" value="Synology NAS" vertex="1">
+          <mxGeometry height="31" width="50" x="210" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-35" parent="1" style="shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#EDEDED;strokeColor=#000000;gradientColor=#5B6163;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.laptop;network2IconW=1;network2IconH=0.5734;" value="Mon pc portable" vertex="1">
+          <mxGeometry height="28.67" width="50" x="540" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-36" parent="1" style="fillColorStyles=neutralFill;neutralFill=#9DA6A8;shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#EDEDED;strokeColor=#000000;gradientColor=#5B6163;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.nas_filer;network2IconW=1;network2IconH=0.62;" value="Synology back up&#xa;" vertex="1">
+          <mxGeometry height="31" width="50" x="364" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-38" edge="1" parent="1" source="GZKspyNicU68e6l3w8ZS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.612;entryY=0.368;entryDx=0;entryDy=0;entryPerimeter=0;" target="GZKspyNicU68e6l3w8ZS-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GZKspyNicU68e6l3w8ZS-40" edge="1" parent="1" source="GZKspyNicU68e6l3w8ZS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.556;entryY=0.316;entryDx=0;entryDy=0;entryPerimeter=0;" target="GZKspyNicU68e6l3w8ZS-36">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="392" y="220" />
+              <mxPoint x="392" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
