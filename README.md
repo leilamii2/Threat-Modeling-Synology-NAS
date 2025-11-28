@@ -10,3 +10,4 @@ Threat modeling and security assessment of a Synology NAS using STRIDE
 - Première version du diagramme réseau dans \01-pratical-work\screenshots\
 - Difficulté : visualiser la topologie exacte du réseau, notamment le câblage/switchs
     Le schéma réseau est incomplet car je n’ai pas accès aux informations physiques sur le câblage ni la liste complète des switches.
+## Day 2: 28/11/2025
