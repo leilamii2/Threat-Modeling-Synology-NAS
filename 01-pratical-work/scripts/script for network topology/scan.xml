@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///C:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Tue Nov 25 16:18:13 2025 as: &quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -sn -oX scan.xml 192.168.1.0/24 -->
+<nmaprun scanner="nmap" args="&quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -sn -oX scan.xml 192.168.1.0/24" start="1764083893" startstr="Tue Nov 25 16:18:13 2025" version="7.98" xmloutputversion="1.05">
+<verbose level="0"/>
+<debugging level="0"/>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.2" addrtype="ipv4"/>
+<address addr="00:11:32:6A:FA:33" addrtype="mac" vendor="Synology Incorporated"/>
+<hostnames>
+</hostnames>
+<times srtt="3000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.11" addrtype="ipv4"/>
+<address addr="C8:FE:0F:9E:EE:C3" addrtype="mac" vendor="Shenzhen Bilian Electronic&#xef;&#xbc;&#x8c;LTD"/>
+<hostnames>
+</hostnames>
+<times srtt="79000" rttvar="79000" to="395000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.12" addrtype="ipv4"/>
+<address addr="C8:FE:0F:9E:9A:7C" addrtype="mac" vendor="Shenzhen Bilian Electronic&#xef;&#xbc;&#x8c;LTD"/>
+<hostnames>
+</hostnames>
+<times srtt="84000" rttvar="84000" to="420000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.13" addrtype="ipv4"/>
+<address addr="CC:64:1A:01:74:AA" addrtype="mac" vendor="Shenzhen Bilian Electronic&#xef;&#xbc;&#x8c;LTD"/>
+<hostnames>
+</hostnames>
+<times srtt="62000" rttvar="62000" to="310000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.16" addrtype="ipv4"/>
+<address addr="9C:05:D6:30:9F:57" addrtype="mac" vendor="Ubiquiti"/>
+<hostnames>
+</hostnames>
+<times srtt="4000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.23" addrtype="ipv4"/>
+<address addr="00:11:32:6E:A9:B1" addrtype="mac" vendor="Synology Incorporated"/>
+<hostnames>
+</hostnames>
+<times srtt="3000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.24" addrtype="ipv4"/>
+<address addr="28:7F:CF:AA:C5:26" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+<times srtt="41000" rttvar="41000" to="205000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.28" addrtype="ipv4"/>
+<address addr="44:DB:D2:72:D1:DE" addrtype="mac" vendor="Yealink(Xiamen) Network Technology"/>
+<hostnames>
+</hostnames>
+<times srtt="2000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.29" addrtype="ipv4"/>
+<address addr="00:26:73:D9:76:02" addrtype="mac" vendor="Ricoh Company"/>
+<hostnames>
+</hostnames>
+<times srtt="2000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.33" addrtype="ipv4"/>
+<address addr="C8:D3:FF:9D:BC:C9" addrtype="mac" vendor="Hewlett Packard"/>
+<hostnames>
+</hostnames>
+<times srtt="3000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.34" addrtype="ipv4"/>
+<address addr="44:DB:D2:5B:8E:9A" addrtype="mac" vendor="Yealink(Xiamen) Network Technology"/>
+<hostnames>
+</hostnames>
+<times srtt="53000" rttvar="53000" to="265000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.35" addrtype="ipv4"/>
+<address addr="C8:D3:FF:9D:C0:7F" addrtype="mac" vendor="Hewlett Packard"/>
+<hostnames>
+</hostnames>
+<times srtt="3000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.38" addrtype="ipv4"/>
+<address addr="A0:8C:FD:D1:5D:31" addrtype="mac" vendor="Hewlett Packard"/>
+<hostnames>
+</hostnames>
+<times srtt="2000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.41" addrtype="ipv4"/>
+<address addr="24:2F:D0:1A:CE:B6" addrtype="mac" vendor="TP-Link PTE."/>
+<hostnames>
+</hostnames>
+<times srtt="2000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.45" addrtype="ipv4"/>
+<address addr="44:37:E6:CB:2A:23" addrtype="mac" vendor="Hon Hai Precision Ind."/>
+<hostnames>
+</hostnames>
+<times srtt="2000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.46" addrtype="ipv4"/>
+<address addr="44:DB:D2:7C:12:CA" addrtype="mac" vendor="Yealink(Xiamen) Network Technology"/>
+<hostnames>
+</hostnames>
+<times srtt="3000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.49" addrtype="ipv4"/>
+<address addr="70:20:84:0F:1F:DA" addrtype="mac" vendor="Hon Hai Precision Industry"/>
+<hostnames>
+</hostnames>
+<times srtt="11000" rttvar="11000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.50" addrtype="ipv4"/>
+<address addr="F8:75:A4:44:EC:87" addrtype="mac" vendor="LCFC(Hefei) Electronics Technology"/>
+<hostnames>
+</hostnames>
+<times srtt="10000" rttvar="10000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.54" addrtype="ipv4"/>
+<address addr="70:1C:E7:3C:0F:E1" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+<times srtt="115000" rttvar="115000" to="575000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.65" addrtype="ipv4"/>
+<address addr="A2:35:E3:43:9E:2E" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<times srtt="103375" rttvar="101250" to="508375"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.66" addrtype="ipv4"/>
+<address addr="F4:E2:C6:DC:26:DF" addrtype="mac" vendor="Ubiquiti"/>
+<hostnames>
+</hostnames>
+<times srtt="26000" rttvar="26000" to="130000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.68" addrtype="ipv4"/>
+<address addr="22:2F:3E:8D:0C:1E" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<times srtt="76665" rttvar="46605" to="263085"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.254" addrtype="ipv4"/>
+<address addr="D4:01:C3:D7:C3:87" addrtype="mac" vendor="Routerboard.com"/>
+<hostnames>
+</hostnames>
+<times srtt="4000" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="localhost-response" reason_ttl="0"/>
+<address addr="192.168.1.42" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</host>
+<runstats><finished time="1764083900" timestr="Tue Nov 25 16:18:20 2025" summary="Nmap done at Tue Nov 25 16:18:20 2025; 256 IP addresses (24 hosts up) scanned in 6.76 seconds" elapsed="6.76" exit="success"/><hosts up="24" down="232" total="256"/>
+</runstats>
+</nmaprun>

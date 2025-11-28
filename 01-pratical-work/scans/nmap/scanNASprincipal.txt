@@ -1,0 +1,106 @@
+# Nmap 7.98 scan initiated Fri Nov 28 12:43:08 2025 as: "C:\\Program Files (x86)\\Nmap\\nmap.exe" -sV -sC -p- -oN scanNASprincipal.txt 192.168.1.2
+Nmap scan report for 192.168.1.2
+Host is up (0.0017s latency).
+Not shown: 65522 closed tcp ports (reset)
+PORT     STATE SERVICE       VERSION
+80/tcp   open  http          nginx
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: Site doesn't have a title (text/html).
+139/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: COMPTAEXPERT)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+443/tcp  open  ssl/http      nginx
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: Site doesn't have a title (text/html).
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+| ssl-cert: Subject: commonName=synology.com/organizationName=Synology Inc./countryName=TW
+| Not valid before: 2017-06-05T17:03:25
+|_Not valid after:  2037-02-20T17:03:25
+|_ssl-date: TLS randomness does not represent time
+445/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: COMPTAEXPERT)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+548/tcp  open  afp           Netatalk 3.1.12 (name: COMPTA_BXL; protocol 3.4)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+| afp-serverinfo: 
+|   Server Flags: 
+|     Flags hex: 0x8f79
+|     Super Client: true
+|     UUIDs: true
+|     UTF8 Server Name: true
+|     Open Directory: true
+|     Reconnect: false
+|     Server Notifications: true
+|     TCP/IP: true
+|     Server Signature: true
+|     Server Messages: true
+|     Password Saving Prohibited: false
+|     Password Changing: false
+|     Copy File: true
+|   Server Name: COMPTA_BXL
+|   Machine Type: Netatalk3.1.12
+|   AFP Versions: AFP2.2, AFPX03, AFP3.1, AFP3.2, AFP3.3, AFP3.4
+|   UAMs: Cleartxt Passwrd, DHX2, DHCAST128
+|   Server Signature: f42528dc3f574796c6af3fc0bcf3233e
+|   Network Addresses: 
+|     192.168.1.2
+|_  UTF8 Server Name: COMPTA_BXL
+3261/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+3263/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+3264/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+3265/tcp open  grpc
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+5000/tcp open  http          nginx
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: COMPTA_BXL&nbsp;-&nbsp;Synology&nbsp;DiskStation
+5001/tcp open  ssl/http      nginx
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+| http-robots.txt: 1 disallowed entry 
+|_/
+| ssl-cert: Subject: commonName=synology.com/organizationName=Synology Inc./countryName=TW
+| Not valid before: 2017-06-05T17:03:25
+|_Not valid after:  2037-02-20T17:03:25
+|_http-title: COMPTA_BXL&nbsp;-&nbsp;Synology&nbsp;DiskStation
+|_ssl-date: TLS randomness does not represent time
+5357/tcp open  http          nginx
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: 502 Bad Gateway
+6690/tcp open  cleverdetect?
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+MAC Address: 00:11:32:6A:FA:33 (Synology Incorporated)
+Service Info: Host: COMPTA_BXL; OS: Unix
+
+Host script results:
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 4m11s, deviation: 0s, median: 4m10s
+|_smb-os-discovery: ERROR: Script execution failed (use -d to debug)
+|_nbstat: NetBIOS name: COMPTA_BXL, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb2-security-mode: 
+|   2.0.2: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2025-11-28T11:48:03
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Fri Nov 28 12:46:11 2025 -- 1 IP address (1 host up) scanned in 182.72 seconds
