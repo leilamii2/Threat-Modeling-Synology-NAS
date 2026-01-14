@@ -1,0 +1,146 @@
+\documentclass{Doc/cls/ULBreport}
+
+% Fix section numbering (remove chapter prefix)
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\sceau{img/sceauULB.jpg}
+
+% Keep fourier fonts for the title
+\usepackage{ragged2e}
+\usepackage{parskip}
+\geometry{a4paper,top=1.5cm,bottom=2cm,left=2cm,right=2cm,headheight=15pt,includehead}
+
+\usepackage{listings}
+% For \AfterGroup hook
+\usepackage{etoolbox}
+% For framed boxes  
+\usepackage[most]{tcolorbox}
+% For colors  
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO:} #1}}
+\usepackage{caption}
+% Configure abstract
+\renewenvironment{abstract}{%
+  \clearpage
+  \thispagestyle{plain}
+  \begin{center}
+    \bfseries\itshape ABSTRACT
+  \end{center}
+  \vspace{0.5cm}
+  \begin{quote}
+    \itshape
+    \justifying
+}{%
+  \end{quote}
+  \clearpage
+}
+
+% Customize citation commands for footnotes
+\DeclareFieldFormat{footnote:note}{#1}
+\DeclareFieldFormat{footnote:shorttitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{footnote:author}{#1}
+\DeclareFieldFormat{footnote:year}{\mkbibparens{#1}}
+\DeclareFieldFormat{footnote:url}{\url{#1}}
+% footnote spacing
+\setlength{\footnotesep}{0.5em}
+
+% Customization  bibliography
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{note}{\textit{#1}}
+
+
+% ========== Color Definitions ==========
+\definecolor{background}{HTML}{FFFFFF}    % Pure white background
+\definecolor{keyword}{HTML}{0000FF}       % Vivid blue for keywords
+\definecolor{comment}{HTML}{008000}       % Rich green for comments
+\definecolor{string}{HTML}{FF0000}        % Bright red for strings
+\definecolor{identifier}{HTML}{000080}    % Deep navy for identifiers
+\definecolor{number}{HTML}{800000}        % Maroon for numbers
+\definecolor{frame}{HTML}{000000}         % Black frame
+
+% ========== tcolorbox Style ==========
+\newtcolorbox{codebox}{
+    enhanced,
+    arc=3pt,
+    boxrule=1pt,
+    colback=background,
+    colframe=frame,
+    top=4pt,
+    bottom=4pt,
+    left=4pt,
+    right=4pt,
+    overlay unbroken and first={
+        \node[anchor=north east] at (frame.north east) {\lstlistingname};
+    }
+}
+
+
+% ========== Listings Configuration ==========
+\lstset{
+    language=bash,
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{background},
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    identifierstyle=\color{identifier},
+    numberstyle=\tiny\color{gray},
+    numbers=none,
+    frame=single,
+    framerule=1pt,
+    rulecolor=\color{frame},
+    breaklines=true,
+    breakatwhitespace=true, % Prevent breaks in middle of words
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    showstringspaces=false,
+    tabsize=4,
+    columns=fullflexible, % Better spacing for copy-paste
+    keepspaces=true, % Preserve whitespace
+    upquote=true, % Ensure proper quote rendering
+    captionpos=b,
+    belowskip=-1.7em,
+    belowcaptionskip=1em,     
+}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\begin{document}
+
+    \titleULB{
+    	title={Deception \& Honeypot for Attack Profiling},
+    	studies={2025-2026},
+    	course={ELEC-H550 - Embededd},
+    	author={MESSAOUDI Leila},
+    	date={January 2026},
+    	teacher={Pr. \\ Navid Ladner},
+    	logo={img/logo_vub_ulb.png},
+    	manyAuthor
+    }
+    
+    % Switch to Computer Modern AFTER title page
+    \renewcommand{\rmdefault}{cmr} % Computer Modern Roman
+    \renewcommand{\sfdefault}{cmss} % Computer Modern Sans
+    \renewcommand{\ttdefault}{cmtt} % Computer Modern Typewriter
+    
+    % Force font update (required after redefining defaults)
+    \makeatletter
+    \renewcommand{\reset@font}{\normalfont\@setfontsize\f@size{12}{14.4}}
+    \makeatother
+    \normalfont
+
+
+    %
+    % ABSTRACT 
+    \begin{abstract}        
+    This paper shows an operatiojjnal deployment .
+    \end{abstract}
+    \newpage
+    %
+    % %
+
+
+    %
+
+
+\end{document}
