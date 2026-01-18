@@ -1,0 +1,75 @@
+PS C:\Users\leila> nmap -sn 192.168.1.0/24 -oX scan.xml
+Starting Nmap 7.98 ( https://nmap.org ) at 2025-11-25 14:47 +0100
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Synology Incorporated)
+Nmap scan report for 192.168.1.x
+Host is up (0.042s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Shenzhen Bilian Electronic´╝îLTD)
+Nmap scan report for 192.168.1.x
+Host is up (0.045s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Shenzhen Bilian Electronic´╝îLTD)
+Nmap scan report for 192.168.1.x
+Host is up (0.092s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Shenzhen Bilian Electronic´╝îLTD)
+Nmap scan report for 192.168.1.x
+Host is up (0.023s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Ubiquiti)
+Nmap scan report for 192.168.1.x
+Host is up (0.0030s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Synology Incorporated)
+Nmap scan report for 192.168.1.x
+Host is up (0.065s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Intel Corporate)
+Nmap scan report for 192.168.1.x
+Host is up (0.0090s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Yealink(Xiamen) Network Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.0080s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Ricoh Company)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hewlett Packard)
+Nmap scan report for 192.168.1.x
+Host is up (0.064s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Yealink(Xiamen) Network Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.0010s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hewlett Packard)
+Nmap scan report for 192.168.1.x
+Host is up (0.0080s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hewlett Packard)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (TP-Link PTE.)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hon Hai Precision Ind.)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Yealink(Xiamen) Network Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.0070s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hon Hai Precision Industry)
+Nmap scan report for 192.168.1.x
+Host is up (0.0070s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (LCFC(Hefei) Electronics Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.11s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Intel Corporate)
+Nmap scan report for 192.168.1.x
+Host is up (0.088s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Unknown)
+Nmap scan report for 192.168.1.x
+Host is up (0.010s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Ubiquiti)
+Nmap scan report for 192.168.1.x
+Host is up (0.076s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Unknown)
+Nmap scan report for 192.168.1.x
+Host is up (0.0040s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Routerboard.com)
+Nmap scan report for 192.168.1.0
+Host is up.
+Nmap done: 256 IP addresses (24 hosts up) scanned in 6.59 seconds
+PS C:\Users\leila>

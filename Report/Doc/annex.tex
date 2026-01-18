@@ -1,0 +1,344 @@
+\newpage
+
+\section{Annex: Supplementary Materials}
+\label{annex:supplementary}
+
+\subsection{Nmap Full Port Scan Output}
+
+The complete Nmap service detection scan output against the primary Synology DS416play NAS is provided below for reference and reproducibility. Sensitive identifiers have been anonymized.
+
+\begin{footnotesize}
+\begin{verbatim}
+# Nmap 7.98 scan initiated Fri Nov 28 12:43:08 2025 as: 
+# "C:\Program Files (x86)\Nmap\nmap.exe" -sV -sC -p- 
+# -oN scanNASprincipal.txt 192.168.1.x
+Nmap scan report for 192.168.1.x
+Host is up (0.0017s latency).
+Not shown: 65522 closed tcp ports (reset)
+PORT     STATE SERVICE       VERSION
+80/tcp   open  http          nginx
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: Site doesn't have a title (text/html).
+139/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: xxx)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+443/tcp  open  ssl/http      nginx
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: Site doesn't have a title (text/html).
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+| ssl-cert: Subject: commonName=synology.com/organizationName=Synology Inc.
+|           /countryName=TW
+| Not valid before: 2017-06-05T17:03:25
+|_Not valid after:  2037-02-20T17:03:25
+|_ssl-date: TLS randomness does not represent time
+445/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: xxx)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+548/tcp  open  afp           Netatalk 3.1.12 (name: xxx; protocol 3.4)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+| afp-serverinfo: 
+|   Server Flags: 
+|     Flags hex: 0x8f79
+|     Super Client: true
+|     UUIDs: true
+|     UTF8 Server Name: true
+|     Open Directory: true
+|     Reconnect: false
+|     Server Notifications: true
+|     TCP/IP: true
+|     Server Signature: true
+|     Server Messages: true
+|     Password Saving Prohibited: false
+|     Password Changing: false
+|     Copy File: true
+|   Server Name: xxx
+|   Machine Type: Netatalk3.1.12
+|   AFP Versions: AFP2.2, AFPX03, AFP3.1, AFP3.2, AFP3.3, AFP3.4
+|   UAMs: Cleartxt Passwrd, DHX2, DHCAST128
+|   Server Signature: f42528dc3f574796c6af3fc0bcf3233e
+|   Network Addresses: 
+|     192.168.1.x
+|_  UTF8 Server Name: xxx
+3261/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+3263/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+3264/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+3265/tcp open  grpc
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+5000/tcp open  http          nginx
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: xxx - Synology DiskStation
+5001/tcp open  ssl/http      nginx
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+| http-robots.txt: 1 disallowed entry 
+|_/
+| ssl-cert: Subject: commonName=synology.com/organizationName=Synology Inc.
+|           /countryName=TW
+| Not valid before: 2017-06-05T17:03:25
+|_Not valid after:  2037-02-20T17:03:25
+|_http-title: xxx - Synology DiskStation
+|_ssl-date: TLS randomness does not represent time
+5357/tcp open  http          nginx
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_http-title: 502 Bad Gateway
+6690/tcp open  cleverdetect?
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+MAC Address: xx:xx:xx:xx:xx:xx (Synology Incorporated)
+Service Info: Host: xxx; OS: Unix
+
+Host script results:
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 4m11s, deviation: 0s, median: 4m10s
+|_smb-os-discovery: ERROR: Script execution failed (use -d to debug)
+|_nbstat: NetBIOS name: xxx, NetBIOS user: <unknown>, 
+         NetBIOS MAC: <unknown> (unknown)
+| smb2-security-mode: 
+|   2.0.2: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2025-11-28T11:48:03
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at 
+https://nmap.org/submit/
+# Nmap done at Fri Nov 28 12:46:11 2025 -- 1 IP address (1 host up) 
+# scanned in 182.72 seconds
+\end{verbatim}
+\end{footnotesize}
+
+\subsection{Nmap Network Discovery Scan Output}
+
+Network-wide discovery scan identifying all active hosts on the 192.168.1.0/24 subnet:
+
+\begin{footnotesize}
+\begin{verbatim}
+PS C:\Users\leila> nmap -sn 192.168.1.0/24 -oX scan.xml
+Starting Nmap 7.98 ( https://nmap.org ) at 2025-11-25 14:47 +0100
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Synology Incorporated)
+Nmap scan report for 192.168.1.x
+Host is up (0.042s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Shenzhen Bilian ElectronicLTD)
+Nmap scan report for 192.168.1.x
+Host is up (0.045s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Shenzhen Bilian ElectronicLTD)
+Nmap scan report for 192.168.1.x
+Host is up (0.092s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Shenzhen Bilian ElectronicLTD)
+Nmap scan report for 192.168.1.x
+Host is up (0.023s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Ubiquiti)
+Nmap scan report for 192.168.1.x
+Host is up (0.0030s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Synology Incorporated)
+Nmap scan report for 192.168.1.x
+Host is up (0.065s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Intel Corporate)
+Nmap scan report for 192.168.1.x
+Host is up (0.0090s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Yealink Xiamen Network Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.0080s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Ricoh Company)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hewlett Packard)
+Nmap scan report for 192.168.1.x
+Host is up (0.064s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Yealink Xiamen Network Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.0010s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hewlett Packard)
+Nmap scan report for 192.168.1.x
+Host is up (0.0080s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hewlett Packard)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (TP-Link PTE.)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hon Hai Precision Ind.)
+Nmap scan report for 192.168.1.x
+Host is up (0.0020s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Yealink Xiamen Network Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.0070s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Hon Hai Precision Industry)
+Nmap scan report for 192.168.1.x
+Host is up (0.0070s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (LCFC Hefei Electronics Technology)
+Nmap scan report for 192.168.1.x
+Host is up (0.11s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Intel Corporate)
+Nmap scan report for 192.168.1.x
+Host is up (0.088s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Unknown)
+Nmap scan report for 192.168.1.x
+Host is up (0.010s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Ubiquiti)
+Nmap scan report for 192.168.1.x
+Host is up (0.076s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Unknown)
+Nmap scan report for 192.168.1.x
+Host is up (0.0040s latency).
+MAC Address: xx:xx:xx:xx:xx:xx (Routerboard.com)
+Nmap scan report for 192.168.1.0
+Host is up.
+Nmap done: 256 IP addresses (24 hosts up) scanned in 6.59 seconds
+PS C:\Users\leila>
+\end{verbatim}
+\end{footnotesize}
+
+\subsection{DSM Configuration Screenshots}
+
+This subsection documents the Synology DiskStation Manager configuration settings reviewed during the white-box assessment phase.
+
+\subsubsection{File Services Configuration}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig.png}
+\caption{DSM Services overview showing enabled protocols: SMB (ports 137-139, 445), AFP, DSM interface (ports 5000-5001), iSCSI, and additional packages.}
+\label{fig:annex_dsm_services}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-1.png}
+\caption{SMB advanced settings showing protocol version support and message signing configuration.}
+\label{fig:annex_dsm_smb}
+\end{figure}
+
+\subsubsection{Network and Remote Access Configuration}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-2.png}
+\caption{Network interface configuration showing LAN 1 active with static IP (192.168.X.X), subnet mask, and connection status.}
+\label{fig:annex_network}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-3.png}
+\caption{Service port configuration showing DSM interface services (DiskStation Manager, SMB, SNMP, NTP, WS-Discovery, iSCSI) and associated ports.}
+\label{fig:annex_services_ports}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-4.png}
+\caption{QuickConnect configuration showing active remote access relay with Synology cloud infrastructure.}
+\label{fig:annex_quickconnect}
+\end{figure}
+
+\subsubsection{Security Settings}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-5.png}
+\caption{TLS/SSL profile configuration set to "Intermediate" compatibility level, allowing moderate cipher suites for backward compatibility.}
+\label{fig:annex_tls}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{doc/img/DSMconfig-6.png}
+\caption{Denial-of-Service protection settings showing DoS protection currently inactive for LAN 1 interface.}
+\label{fig:annex_dos}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-7.png}
+\caption{DSM firewall configuration showing firewall feature and settings.}
+\label{fig:annex_firewall}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-8.png}
+\caption{Auto-block protection configuration showing IP-based brute-force defense settings.}
+\label{fig:annex_autoblock}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{doc/img/DSMconfig-9.png}
+\caption{Account security settings showing Two-Factor Authentication (2FA) feature availability.}
+\label{fig:annex_2fa}
+\end{figure}
+
+\subsubsection{System Information}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DSMconfig-10.png}
+\caption{DSM system information displaying hardware specifications (DS416play, Intel Celeron N3060, 1024 MB RAM) and software version (DSM 7.1.1-42962 Update 8).}
+\label{fig:annex_sysinfo}
+\end{figure}
+
+\subsection{Shared Folder Structure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textwidth]{doc/img/DSMconfig-11.png}
+\caption{File Station shared folder hierarchy showing departmental folders (Comptabilité, Data\_Compta, Data\_RH, Direction, home) with role-based access control.}
+\label{fig:annex_folders}
+\end{figure}
+
+\newpage
+
+\section{Annex: LLM Usage in this Project}
+
+\label{annex:llm}
+
+For the preparation of this report, Large Language Models (LLMs) were used as support tools to enhance technical writing quality and structure. The following describes their specific application and the safeguards implemented to maintain academic integrity.
+
+\subsection*{LLM Applications}
+
+\begin{itemize}[label=---]
+
+\item \textbf{Linguistic Correction and Refinement}: The AI assisted in improving the flow of technical English and corrected syntax or grammar errors to enhance readability for an academic audience.
+
+\item \textbf{LaTeX Structure and Formatting}: The AI was used to troubleshoot LaTeX compilation errors, specifically regarding image placement, table formatting, and special character management (e.g., \texttt{\textbackslash textit}, \texttt{\textbackslash textbf}, \texttt{\textbackslash includegraphics}).
+
+\item \textbf{Synthesis Assistance}: The AI helped structure explanations based on raw scan results (Nmap, Nessus, DSM configuration) to make technical findings clearer and more accessible to readers unfamiliar with security assessment tools.
+
+\end{itemize}
+
+\subsection*{Important Clarifications}
+
+\begin{itemize}[label=---]
+
+\item \textbf{Original Content}: All technical data (network scans, vulnerability findings, configuration screenshots, threat analysis) are the direct result of personal work conducted on the organization's network infrastructure. The STRIDE threat model, risk assessment, and security recommendations are entirely original analytical work.
+
+\item \textbf{Verification}: Every suggestion or explanation provided by the AI was cross-validated against authoritative sources including official documentation (Synology DSM guides, Nmap manual, Nessus documentation), academic literature (STRIDE framework, Microsoft SDL), and security standards (NIST SP 800-115, CIS benchmarks) to prevent potential errors or ``hallucinations.''
+
+\item \textbf{Confidentiality}: No sensitive data (IP addresses, MAC addresses, hostnames, credentials, organizational identifiers) was shared with the LLM. All project-specific information was anonymized before any AI interaction to prevent potential data leakage through model training vectors.
+
+\item \textbf{Academic Integrity}: The LLM functioned strictly as an \textit{assistive editing tool}, not as a \textit{content generation tool}. All security findings, threat classifications, and mitigation strategies presented in this report are based on empirical evidence from network assessments and established cybersecurity frameworks, validated independently by the author.
+
+\end{itemize}
+
+% END

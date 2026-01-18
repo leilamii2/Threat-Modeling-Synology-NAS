@@ -1,5 +1,5 @@
-# Nmap 7.98 scan initiated Fri Nov 28 12:43:08 2025 as: "C:\\Program Files (x86)\\Nmap\\nmap.exe" -sV -sC -p- -oN scanNASprincipal.txt 192.168.1.2
-Nmap scan report for 192.168.1.2
+# Nmap 7.98 scan initiated Fri Nov 28 12:43:08 2025 as: "C:\\Program Files (x86)\\Nmap\\nmap.exe" -sV -sC -p- -oN scanNASprincipal.txt 192.168.1.x
+Nmap scan report for 192.168.1.x
 Host is up (0.0017s latency).
 Not shown: 65522 closed tcp ports (reset)
 PORT     STATE SERVICE       VERSION
@@ -7,7 +7,7 @@ PORT     STATE SERVICE       VERSION
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
 |_http-title: Site doesn't have a title (text/html).
-139/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: COMPTAEXPERT)
+139/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: xxx)
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
 443/tcp  open  ssl/http      nginx
@@ -18,10 +18,10 @@ PORT     STATE SERVICE       VERSION
 | Not valid before: 2017-06-05T17:03:25
 |_Not valid after:  2037-02-20T17:03:25
 |_ssl-date: TLS randomness does not represent time
-445/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: COMPTAEXPERT)
+445/tcp  open  netbios-ssn   Samba smbd 3.X - 4.X (workgroup: xxx)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
-548/tcp  open  afp           Netatalk 3.1.12 (name: COMPTA_BXL; protocol 3.4)
+548/tcp  open  afp           Netatalk 3.1.12 (name: xxx; protocol 3.4)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
 | afp-serverinfo: 
@@ -39,14 +39,14 @@ PORT     STATE SERVICE       VERSION
 |     Password Saving Prohibited: false
 |     Password Changing: false
 |     Copy File: true
-|   Server Name: COMPTA_BXL
+|   Server Name: xxx
 |   Machine Type: Netatalk3.1.12
 |   AFP Versions: AFP2.2, AFPX03, AFP3.1, AFP3.2, AFP3.3, AFP3.4
 |   UAMs: Cleartxt Passwrd, DHX2, DHCAST128
 |   Server Signature: f42528dc3f574796c6af3fc0bcf3233e
 |   Network Addresses: 
-|     192.168.1.2
-|_  UTF8 Server Name: COMPTA_BXL
+|     192.168.1.x
+|_  UTF8 Server Name: xxx
 3261/tcp open  iscsi         Synology DSM Snapshot Replication iSCSI LUN
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
@@ -64,7 +64,7 @@ PORT     STATE SERVICE       VERSION
 |_/
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
-|_http-title: COMPTA_BXL&nbsp;-&nbsp;Synology&nbsp;DiskStation
+|_http-title: xxx&nbsp;-&nbsp;Synology&nbsp;DiskStation
 5001/tcp open  ssl/http      nginx
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
@@ -73,7 +73,7 @@ PORT     STATE SERVICE       VERSION
 | ssl-cert: Subject: commonName=synology.com/organizationName=Synology Inc./countryName=TW
 | Not valid before: 2017-06-05T17:03:25
 |_Not valid after:  2037-02-20T17:03:25
-|_http-title: COMPTA_BXL&nbsp;-&nbsp;Synology&nbsp;DiskStation
+|_http-title: xxx&nbsp;-&nbsp;Synology&nbsp;DiskStation
 |_ssl-date: TLS randomness does not represent time
 5357/tcp open  http          nginx
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
@@ -82,8 +82,8 @@ PORT     STATE SERVICE       VERSION
 6690/tcp open  cleverdetect?
 |_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
-MAC Address: 00:11:32:6A:FA:33 (Synology Incorporated)
-Service Info: Host: COMPTA_BXL; OS: Unix
+MAC Address: xx:xx:xx:xx:xx:xx (Synology Incorporated)
+Service Info: Host: xxx; OS: Unix
 
 Host script results:
 |_ms-sql-info: ERROR: Script execution failed (use -d to debug)
@@ -94,7 +94,7 @@ Host script results:
 |_  message_signing: disabled (dangerous, but default)
 |_clock-skew: mean: 4m11s, deviation: 0s, median: 4m10s
 |_smb-os-discovery: ERROR: Script execution failed (use -d to debug)
-|_nbstat: NetBIOS name: COMPTA_BXL, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+|_nbstat: NetBIOS name: xxx, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
 | smb2-security-mode: 
 |   2.0.2: 
 |_    Message signing enabled but not required

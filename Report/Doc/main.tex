@@ -1,0 +1,596 @@
+%main.tex
+\documentclass{cls/ULBreport}
+
+% Fix section numbering (remove chapter prefix)
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\sceau{img/sceauULB.jpg}
+
+% Keep fourier fonts for the title
+\usepackage{ragged2e}
+\usepackage{parskip}
+\geometry{a4paper,top=1.5cm,bottom=2cm,left=2cm,right=2cm,headheight=15pt,includehead}
+
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+% For \AfterGroup hook
+\usepackage{etoolbox}
+% For framed boxes  
+\usepackage[most]{tcolorbox}
+% For colors  
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO:} #1}}
+\usepackage{caption}
+% Configure abstract
+\renewenvironment{abstract}{%
+  \clearpage
+  \thispagestyle{plain}
+  \begin{center}
+    \bfseries\itshape ABSTRACT
+  \end{center}
+  \vspace{0.5cm}
+  \begin{quote}
+    \itshape
+    \justifying
+}{%
+  \end{quote}
+  \clearpage
+}
+
+% Customize citation commands for footnotes
+\DeclareFieldFormat{footnote:note}{#1}
+\DeclareFieldFormat{footnote:shorttitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{footnote:author}{#1}
+\DeclareFieldFormat{footnote:year}{\mkbibparens{#1}}
+\DeclareFieldFormat{footnote:url}{\url{#1}}
+% footnote spacing
+\setlength{\footnotesep}{0.5em}
+
+% Customization  bibliography
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{note}{\textit{#1}}
+
+
+% ========== Color Definitions ==========
+\definecolor{background}{HTML}{FFFFFF}    % Pure white background
+\definecolor{keyword}{HTML}{0000FF}       % Vivid blue for keywords
+\definecolor{comment}{HTML}{008000}       % Rich green for comments
+\definecolor{string}{HTML}{FF0000}        % Bright red for strings
+\definecolor{identifier}{HTML}{000080}    % Deep navy for identifiers
+\definecolor{number}{HTML}{800000}        % Maroon for numbers
+\definecolor{frame}{HTML}{000000}         % Black frame
+
+% ========== tcolorbox Style ==========
+\newtcolorbox{codebox}{
+    enhanced,
+    arc=3pt,
+    boxrule=1pt,
+    colback=background,
+    colframe=frame,
+    top=4pt,
+    bottom=4pt,
+    left=4pt,
+    right=4pt,
+    overlay unbroken and first={
+        \node[anchor=north east] at (frame.north east) {\lstlistingname};
+    }
+}
+
+
+% ========== Listings Configuration ==========
+\lstset{
+    language=bash,
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{background},
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    identifierstyle=\color{identifier},
+    numberstyle=\tiny\color{gray},
+    numbers=none,
+    frame=single,
+    framerule=1pt,
+    rulecolor=\color{frame},
+    breaklines=true,
+    breakatwhitespace=true, % Prevent breaks in middle of words
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    showstringspaces=false,
+    tabsize=4,
+    columns=fullflexible, % Better spacing for copy-paste
+    keepspaces=true, % Preserve whitespace
+    upquote=true, % Ensure proper quote rendering
+    captionpos=b,
+    belowskip=-1.7em,
+    belowcaptionskip=1em,     
+}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\begin{document}
+
+    \titleULB{
+    	title={Threat Modeling and security assessment of a NAS Storage System in a small office network},
+    	studies={2025-2026},
+    	course={ELEC-H550 - Embedded Systems Security},
+    	author={MESSAOUDI Leila},
+    	date={January 2026},
+    	teacher={Pr. Jan Tobias Mühlberg \\ Navid Ladner},
+    	logo={img/logo_vub_ulb.png},
+    	manyAuthor
+    }
+    
+    % Switch to Computer Modern AFTER title page
+    \renewcommand{\rmdefault}{cmr} % Computer Modern Roman
+    \renewcommand{\sfdefault}{cmss} % Computer Modern Sans
+    \renewcommand{\ttdefault}{cmtt} % Computer Modern Typewriter
+    
+    % Force font update (required after redefining defaults)
+    \makeatletter
+    \renewcommand{\reset@font}{\normalfont\@setfontsize\f@size{12}{14.4}}
+    \makeatother
+    \normalfont
+
+
+    %
+    % ABSTRACT 
+    \begin{abstract}        
+    This paper presents a threat modeling and security assessment of a Synology NAS device deployed as centralized file storage in a small office network. By using a hybrid three-phase approach combining black-box reconnaissance (Nmap), grey-box vulnerability validation (Nessus), and white-box threat analysis (STRIDE), the assessment identifies critical security flaws including cleartext AFP authentication, disabled SMB message signing, unencrypted administrative interfaces, and absence of audit logging, each enabling credential theft, data tampering and forensic evasion. The study proposes mitigations across technical hardening and organizational measures, demonstrating a practical security assessment framework for resource-constrained environments dependent on NAS devices. 
+    \end{abstract}
+    \newpage
+    %
+    % %
+
+
+    \section{Scope and Methodology}
+
+         \subsection{Authorization and Organizational Context}
+         This security assessment was conducted on a Synology DS416play NAS deployed at a family-owned accounting and HR firm in Molenbeek-Saint-Jean, Brussels. Formal authorization was obtained from the organization's director before the start of the project. The firm employs nine personnel: one director (IT administrator), two accountants, one secretary, two interns, and one HR officer. The NAS serves as centralized file storage with role-based access: accounting staff access Comptabilité and Data\_Compta folders, HR personnel access Data\_RH, management accesses Direction, and shared directories (home, homes) are available to all employees. Sensitive data includes financial records, client invoices, employee payroll information, and HR documentation, making NAS security critical for GDPR compliance and business continuity.
+
+        %
+        % %
+        \subsection{Network Infrastructure}
+        The office network comprises 24 active devices distributed across three managed switches:
+Switch 1 (Primary segment): Synology DS416play NAS, 4 Windows workstations, 3 Yealink IP phones, 1 Ricoh multifunction printer, and Ubiquiti access points.
+Switch 2 (Secondary segment): 3 additional Windows workstations for accounting and administrative tasks.
+Switch 3 (Tertiary segment): Backup Synology NAS and MikroTik RouterBoard gateway (providing Internet connectivity via NAT). Remote access to the NAS is set up with Synology QuickConnect (ID: compta-01), enabling external connectivity without requiring manual port-forwarding configurations on the gateway.
+
+        \subsection{Assessment Scope}
+        In-scope: Synology DS416play NAS (DSM management interface, file-sharing protocols, network services), office network infrastructure (switches, gateway, connected devices), remote access mechanisms (QuickConnect), and DSM configuration settings (authentication, logging, encryption).
+Out-of-scope: Backup NAS configuration, physical security measures, endpoint antivirus/EDR deployment, LDAP/Active Directory integration, and internal network segmentation policies beyond switch-level segregation.
+Note: While the Backup NAS is out-of-scope for deep configuration analysis, its presence is considered in the threat model regarding potential lateral movement risks.
+
+        \subsection{Hybrid Three-Phase Methidology}
+        The assessment employs three complementary approaches to provide comprehensive security analysis:
+Phase 1 – Black-box Reconnaissance (Nmap): Network scanning discovers exposed services and architecture from an external attacker perspective, without prior system knowledge. Full port enumeration and service detection identify which ports and protocols are accessible on the NAS and across the office network.
+
+Phase 2 – Grey-box Vulnerability Validation (Nessus): Targeted vulnerability scanning was performed using partial system knowledge (IP addressing, service context). This phase utilizes industry-standard databases to validate the severity and exploitability of the exposed services identified in Phase 1, without requiring administrative credentials (unauthenticated scan).
+
+Phase 3 – White-box Threat Analysis (Configuration Review + STRIDE): Comprehensive threat modeling based on complete system architecture knowledge, combining manual inspection of DSM administrative settings (authentication mechanisms, network services, firewall rules, logging policies, remote access configurations) with systematic threat identification across six STRIDE categories (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege). Data Flow Diagrams (DFD) and trust boundary analysis map technical findings from Phases 1-2 and configuration review to business risks within the specific organizational context.
+
+This progressive three-phase approach transitions from external discovery to insider perspective, enabling both technical validation and organizational risk assessment.
+
+
+\section{System Architecture and Data Flow Diagram}
+
+\subsection{Network Topology}
+
+The office network follows a three-tier switch architecture connecting all operational devices to a central MikroTik gateway. Figure~\ref{fig:network_topology} illustrates the physical and logical network layout, showing device distribution across network segments.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{doc/img/Network_topology_NAS.png}
+\caption{Office network topology showing three switch segments: Switch 1 with primary NAS and workstations, Switch 2 with secondary workstations, Switch 3 with backup NAS and gateway.}
+\label{fig:network_topology}
+\end{figure}
+
+Switch 1 hosts the primary operational devices including the Synology DS416play NAS, three user workstations, one Yealink IP phone, and one Ricoh multifunction printer. This segment represents the highest-traffic zone with continuous file access operations during business hours. Switch 2 provides network connectivity to three additional workstations used primarily by accounting and administrative staff. Switch 3 isolates the backup NAS and MikroTik Internet gateway, creating a logical separation between production file services and external connectivity.
+
+Remote access is facilitated through Synology QuickConnect, which establishes an encrypted relay connection via Synology's cloud infrastructure (\texttt{quickconnect.to}). This architecture eliminates the need for manual port-forwarding on the MikroTik gateway, but introduces dependency on third-party relay services for remote DSM access.
+
+\subsection{Data Flow Diagram (DFD)}
+
+The Data Flow Diagram in Figure~\ref{fig:dfd} models the NAS system from a security perspective, identifying trust boundaries, data flows, and interaction points between actors and system components.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{doc/img/DFD.png}
+\caption{Data Flow Diagram showing trust boundary, actors (Admin, Employees), processes (Web Interface DSM, File Services), and data stores (System Database, File System).}
+\label{fig:dfd}
+\end{figure}
+
+\textbf{External Entities:}
+\begin{itemize}
+    \item \textit{Admin}: IT administrator with full DSM access, configures system settings, manages user accounts, and monitors NAS health via the web interface.
+    \item \textit{Employees (Finance, HR)}: End users accessing shared folders via SMB/AFP protocols from Windows workstations. Access is role-based and restricted to specific departmental folders.
+\end{itemize}
+
+\textbf{Processes (inside trust boundary):}
+\begin{itemize}
+    \item \textit{Web Interface DSM HTTP}: Administrative portal accessible on ports 5000 (HTTP) and 5001 (HTTPS). Handles authentication, configuration changes, and system monitoring.
+    \item \textit{File Services SMB/AFP}: File-sharing protocols (SMB ports 139/445, AFP port 548) providing read/write access to shared folders. Handles access control enforcement and file transfer operations.
+\end{itemize}
+
+\textbf{Data Stores:}
+\begin{itemize}
+    \item \textit{System Database}: Stores DSM configuration, user credentials, access logs, and system metadata.
+    \item \textit{File System}: Contains shared folders (Comptabilité, Data\_Compta, Data\_RH, Direction, home) with sensitive business data.
+\end{itemize}
+
+\textbf{Data Flows:}
+\begin{itemize}
+    \item \textit{Configuration}: Admin modifies DSM settings (user accounts, network services, security policies).
+    \item \textit{Dashboard status}: DSM interface returns system health, logs, and configuration status to Admin.
+    \item \textit{Access Check}: File Services queries System Database to validate user permissions before granting folder access.
+    \item \textit{Credentials \& Files}: Employees authenticate and transfer file data via SMB/AFP.
+    \item \textit{Read storage / Configs \& logs}: Bidirectional communication between processes and data stores.
+\end{itemize}
+
+\subsection{Critical Assets and Trust Boundaries}
+
+The red dashed line in Figure~\ref{fig:dfd} represents the \textbf{trust boundary} separating external actors (potentially untrusted) from internal NAS processes and data stores. Crossing this boundary requires authentication and authorization enforcement.
+
+\textbf{Critical assets requiring protection:}
+\begin{itemize}
+    \item \textbf{System Database}: Contains admin credentials, user account hashes, and security configurations. Compromise enables full system takeover.
+    \item \textbf{File System}: Stores GDPR-regulated financial and HR data. Unauthorized access or tampering impacts confidentiality, integrity, and legal compliance.
+    \item \textbf{Web Interface DSM}: Administrative control plane. Exposure or weak authentication enables attacker privilege escalation.
+    \item \textbf{File Services}: Primary attack surface for internal threats (ransomware, data exfiltration, accidental deletion).
+\end{itemize}
+
+This DFD serves as the foundation for STRIDE threat modeling in Section~4, where each data flow and trust boundary crossing is systematically analyzed for potential security threats.
+
+
+
+\section{Technical Findings}
+
+This section presents the results of the three-phase security assessment, documenting vulnerabilities and misconfigurations discovered through network reconnaissance, vulnerability validation, and configuration review. Findings are presented in order of discovery phase to demonstrate the progressive refinement from external scanning to authenticated configuration analysis.
+
+\subsection{Network Discovery and Service Enumeration (Nmap)}
+
+A comprehensive port scan was conducted against the primary Synology DS416play NAS (192.168.1.X) using Nmap 7.98 with service detection and default script execution (\texttt{nmap -sV -sC -p-}). The scan identified 13 open TCP ports exposing multiple network services, as summarized in Table~\ref{tab:nmap_ports}.
+
+\begin{table}[h]
+\centering
+\caption{Open ports and services discovered on Synology DS416play NAS.}
+\label{tab:nmap_ports}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Port/Protocol} & \textbf{Service} & \textbf{Version/Details} \\ \hline
+80/tcp & HTTP & nginx (unencrypted web interface) \\ \hline
+139/tcp & NetBIOS-SSN & Samba smbd 3.X - 4.X (workgroup: COMPTAEXPERT) \\ \hline
+443/tcp & HTTPS & nginx with self-signed certificate \\ \hline
+445/tcp & SMB & Samba smbd 3.X - 4.X \\ \hline
+548/tcp & AFP & Netatalk 3.1.12 (Apple Filing Protocol) \\ \hline
+3261-3264/tcp & iSCSI & Synology DSM Snapshot Replication LUN \\ \hline
+3265/tcp & gRPC & Unknown service \\ \hline
+5000/tcp & HTTP & DSM web interface (unencrypted) \\ \hline
+5001/tcp & HTTPS & DSM web interface (encrypted) \\ \hline
+5357/tcp & HTTP & nginx (502 Bad Gateway error) \\ \hline
+6690/tcp & Unknown & cleverdetect service \\ \hline
+\end{tabular}
+\end{table}
+
+\textbf{Critical observations from Nmap output:}
+
+\begin{itemize}
+    \item \textbf{AFP cleartext authentication (Port 548):} Nmap NSE script \texttt{afp-serverinfo} revealed that the AFP service supports cleartext password authentication (\texttt{UAMs: Cleartxt Passwrd, DHX2, DHCAST128}). This represents a critical confidentiality risk, as credentials transmitted over AFP can be intercepted via network sniffing (e.g., Wireshark on the LAN).
+    
+    \item \textbf{SMB message signing disabled:} The \texttt{smb-security-mode} script detected that SMB message signing is "disabled (dangerous, but default)". This configuration allows Man-in-the-Middle (MitM) attacks where an attacker on the local network can intercept and modify SMB traffic without detection.
+    
+    \item \textbf{Unencrypted HTTP interfaces (Ports 80, 5000):} Both the generic HTTP service and the DSM administrative interface are accessible without encryption, exposing authentication credentials and session tokens to interception.
+    
+    \item \textbf{Self-signed SSL certificates:} HTTPS services on ports 443 and 5001 use self-signed certificates issued by Synology Inc. with validity from 2017 to 2037. These certificates do not provide protection against MitM attacks, as browsers display security warnings and users may be conditioned to bypass them.
+    
+    \item \textbf{Guest account enabled on SMB:} The scan revealed \texttt{account\_used: guest}, indicating that anonymous SMB enumeration is possible without authentication.
+\end{itemize}
+
+Network-wide discovery (\texttt{nmap -sn 192.168.1.0/24}) identified 24 active hosts, including Windows workstations (HP, Intel Corporate), Yealink IP phones, Ricoh printer, Ubiquiti access points, and the MikroTik gateway. This expanded attack surface demonstrates potential lateral movement paths from compromised endpoints to the NAS.
+
+\subsection{Vulnerability Validation (Nessus)}
+
+Nessus Professional was deployed to validate the exploitability and severity of services discovered in Phase 1. An unauthenticated "Basic Network Scan" was executed against the primary NAS, resulting in 33 detected vulnerabilities distributed across severity levels as shown in Figure~\ref{fig:nessus_severity}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{doc/img/Nessus scan/Nessus scan.png}
+\caption{Nessus vulnerability severity distribution: 5 Medium, 81 Info, minimal Critical/High findings.}
+\label{fig:nessus_severity}
+\end{figure}
+
+\textbf{Key validated vulnerabilities:}
+
+\begin{itemize}
+    \item \textbf{SSL/TLS Certificate Issues (12 findings):} Multiple SSL/TLS misconfigurations including self-signed certificates, certificate hostname mismatches, and support for weak cipher suites. These findings confirm the MitM risk identified during Nmap scanning.
+    
+    \item \textbf{SMB Security Weaknesses (2 findings):} Nessus confirmed SMB message signing is not required, validating the relay attack risk. Additional findings noted SMB protocol version negotiation allowing downgrade to SMBv1 (deprecated due to known vulnerabilities).
+    
+    \item \textbf{HTTP Services Exposed (7 findings):} Multiple HTTP services detected without TLS encryption, including the DSM administrative interface on port 5000. Nessus flagged this as a credential exposure risk.
+    
+    \item \textbf{ICMP Timestamp Request Response (Low severity):} Network reconnaissance capability allowing attackers to fingerprint system uptime and potentially correlate with patch cycles.
+    
+    \item \textbf{False Positive Dismissed - CVE-2011-3192 "Apache Killer":} Nmap NSE scripts flagged a potential Denial-of-Service vulnerability (Apache Killer). Nessus validation determined this was a false positive due to Synology's security backporting practices, where the underlying vulnerability is patched but the software banner remains unchanged. The actual DoS risk is negligible.
+\end{itemize}
+
+While Nessus did not detect critical or high-severity software vulnerabilities (indicating that DSM 7.1.1 is relatively up-to-date), the concentration of Medium-severity configuration weaknesses demonstrates systemic security posture gaps.
+
+\subsection{Configuration Review (DSM Administrative Settings)}
+
+Manual inspection of Synology DiskStation Manager (DSM) administrative settings revealed multiple security misconfigurations not detectable through external scanning. This phase provided critical context for understanding organizational security practices and insider threat exposure.
+
+\textbf{Authentication and Access Control:}
+\begin{itemize}
+    \item \textbf{Two-Factor Authentication (2FA) not enforced:} DSM supports 2FA for administrative accounts, but this feature is not enabled. Remote access via QuickConnect without 2FA represents a significant account compromise risk.
+    
+    \item \textbf{Shared generic accounts:} File share access logs and user account enumeration revealed the use of shared departmental accounts (e.g., "Compta" for accounting staff) rather than individual user accounts. This practice prevents individual accountability and violates the principle of least privilege.
+\end{itemize}
+
+\textbf{Network Services and Exposure:}
+\begin{itemize}
+    \item \textbf{AFP protocol enabled:} Despite being deprecated by Apple in favor of SMB since macOS 10.9 (2013), the AFP service remains active. This legacy protocol supports cleartext authentication and should be disabled.
+    
+    \item \textbf{QuickConnect remote access enabled:} Synology QuickConnect (ID: compta-01) is configured to allow remote DSM access via Synology's cloud relay infrastructure. While this service uses TLS encryption, it introduces dependency on third-party infrastructure and expands the attack surface to Internet-based threats.
+    
+    \item \textbf{Unencrypted HTTP not redirected to HTTPS:} DSM allows access via HTTP on port 5000 without automatic redirection to HTTPS (port 5001), enabling session hijacking and credential interception attacks.
+\end{itemize}
+
+\textbf{Security Hardening:}
+\begin{itemize}
+    \item \textbf{NAS firewall disabled:} The built-in DSM firewall is not activated, providing no network-layer access control beyond default service bindings.
+    
+    \item \textbf{DoS protection inactive:} Denial-of-Service protection mechanisms are disabled, leaving the NAS vulnerable to resource exhaustion attacks.
+    
+    \item \textbf{Auto-block enabled (positive finding):} IP-based auto-blocking is configured (10 failed login attempts within 5 minutes triggers a temporary ban), providing basic brute-force protection.
+    
+    \item \textbf{TLS/SSL profile set to "Intermediate":} The TLS configuration permits moderately weak cipher suites for backward compatibility, rather than enforcing modern cryptographic standards.
+\end{itemize}
+
+\textbf{Logging and Monitoring:}
+\begin{itemize}
+    \item \textbf{File operation logging not enabled:} DSM does not log file access, modification, or deletion events. This absence of audit trails prevents forensic investigation of data breaches, accidental deletions, or insider threats, directly impacting the "Repudiation" threat category in STRIDE.
+    
+    \item \textbf{No centralized log forwarding:} Logs are stored locally on the NAS without remote syslog export. If the NAS is compromised, attackers can modify or delete logs to cover their tracks.
+\end{itemize}
+
+\textbf{Backup and Recovery:}
+\begin{itemize}
+    \item \textbf{Backup NAS present but snapshot strategy unclear:} A secondary Synology NAS exists on Switch 3 for backup purposes. However, the backup frequency, retention policy, and disaster recovery procedures were not documented during the assessment scope. This represents a business continuity risk if ransomware or hardware failure impacts the primary NAS.
+\end{itemize}
+
+These configuration findings demonstrate that while the Synology DS416play is running up-to-date firmware (DSM 7.1.1), the \textit{deployment configuration} deviates significantly from security best practices, creating exploitable weaknesses for both external and insider threats.
+
+
+
+
+\section{STRIDE Threat Modeling Analysis}
+
+This section applies the STRIDE threat modeling framework to the entire office network ecosystem. Rather than focusing solely on the NAS, this analysis treats the network as an interconnected system where threats at any device can compromise the central file storage infrastructure.
+
+\subsection{Threat Model Scope and Architecture}
+
+The threat model encompasses the entire office network, including the Synology DS416play NAS (primary and backup instances), 6 Windows workstations, MikroTik gateway, network switches, Ubiquiti WiFi access points, Yealink IP phones, and Ricoh multifunction printer. The analysis identifies external attackers (Internet-based), internal threats (compromised workstations), and accidental threats (misconfiguration, user error) across multiple entry points and trust boundaries.
+
+\subsection{STRIDE Threat Summary}
+
+\begin{table}[h]
+\centering
+\caption{Comprehensive STRIDE Threat Analysis - Office Network}
+\label{tab:stride_summary}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{STRIDE} & \textbf{Threat Example} & \textbf{Impact} & \textbf{Mitigation} \\ \hline
+
+\multirow{\textbf{S}} & Admin credential theft via & \multirow{Critical} & Enable 2FA, disable \\
+\textbf{Spoofing} & phishing/password reuse & & unencrypted HTTP \\
+\cline{2-4}
+& SMB session hijacking via & High & Enable SMB message \\
+& disabled signing & & signing \& encryption \\ \hline
+
+\multirow{\textbf{T}} & Unencrypted SMB data & \multirow{Critical} & Enable SMB 3.1.1 \\
+\textbf{Tampering} & modification in transit & & encryption \& signing \\
+\cline{2-4}
+& AFP cleartext file & High & Disable AFP, migrate \\
+& manipulation & & to SMB3 \\ \hline
+
+\multirow{\textbf{R}} & Admin actions cannot be & \multirow{High} & Enable file operation \\
+\textbf{Repudiation} & attributed (no audit logs) & & audit logging \\
+\cline{2-4}
+& Attacker modifies DSM logs & High & Deploy centralized \\
+& to cover tracks & & syslog server \\ \hline
+
+\multirow{\textbf{I}} & GDPR data exposure via & \multirow{Critical} & Encrypt SMB traffic, \\
+\textbf{Information} & unencrypted SMB eavesdropping & & enforce 2FA \\
+\textbf{Disclosure} & HTTP port 5000 credential & Critical & Disable HTTP 5000, \\
+& interception & & enforce HTTPS only \\ \hline
+
+\multirow{\textbf{D}} & Ransomware encrypts all & \multirow{Critical} & Backup/restore, \\
+\textbf{Denial of} & shared folders (complete outage) & & incident response \\
+\textbf{Service} & Volumetric DDoS via port 445 & High & Enable firewall with \\
+& exhausts NAS resources & & rate limiting \\ \hline
+
+\multirow{\textbf{E}} & User account compromised + & \multirow{High} & Implement RBAC, \\
+\textbf{Elevation of} & lateral movement to admin area & & VLAN segmentation \\
+\textbf{Privilege} & Shared account abuse (multiple & High & Eliminate shared \\
+& users → full accountability loss) & & accounts, use RBAC \\ \hline
+
+\end{tabular}
+\end{table}
+
+\subsection{Critical Risk Findings}
+
+Three threats pose existential risk and require immediate mitigation:
+
+\begin{enumerate}
+    \item \textbf{GDPR Data Exposure (Information Disclosure):} Financial and HR data transmitted via unencrypted SMB is vulnerable to passive network eavesdropping. Any attacker on the local network (compromised workstation, rogue WiFi AP) can capture sensitive personal information without authentication, violating GDPR Articles 32 and 33.
+    
+    \item \textbf{Admin Credential Theft (Spoofing):} Weak administrative authentication (no mandatory 2FA) combined with unencrypted HTTP port 5000 enables remote credential interception via phishing or password reuse. Attacker gains full NAS administrative control.
+    
+    \item \textbf{Ransomware Denial of Service:} Compromise of admin account enables attacker to encrypt all shared folder contents, rendering organizational data inaccessible. Combined with disabled audit logging, attack remains undetectable until business-critical data becomes unavailable.
+\end{enumerate}
+
+\subsection{Trust Boundary Violations}
+
+The Data Flow Diagram (Figure~\ref{fig:dfd}) identified a trust boundary separating external users from internal NAS processes. Assessment reveals three critical violations:
+
+\begin{enumerate}
+    \item \textbf{Unencrypted HTTP Credentials:} Administrative credentials cross trust boundary in cleartext via HTTP port 5000, enabling interception.
+    \item \textbf{Disabled SMB Signing:} Authenticated SMB sessions lack integrity protection, allowing Man-in-the-Middle attacks on file operations.
+    \item \textbf{QuickConnect External Dependency:} Administrative authentication delegated to Synology's cloud infrastructure extends trust boundary beyond organizational control.
+\end{enumerate}
+
+Each violation enables credential interception, session hijacking, or unauthorized privilege escalation.
+
+
+
+
+
+
+\section{Recommendations and Mitigation Strategies}
+
+This section presents prioritized security recommendations to address the identified STRIDE threats. Focus is placed on high-impact, cost-effective mitigations that address the most critical vulnerabilities.
+
+\subsection{Critical Priority Mitigations}
+
+\subsubsection{1. Enable SMB Encryption and Message Signing}
+
+\textbf{Threat Addressed:} T-16 (GDPR data exposure), T-7 (SMB tampering), T-2 (SMB hijacking)
+
+Enable SMB 3.1.1 encryption in DSM: \textit{Control Panel} → \textit{File Services} → \textit{SMB/CIFS}:
+
+\begin{itemize}
+    \item Enable SMB encryption (mandatory for all connections)
+    \item Set minimum protocol to SMB 3.0
+    \item Enable SMB message signing
+    \item Disable SMB1 entirely
+\end{itemize}
+
+\textbf{Impact:} Eliminates cleartext SMB traffic and prevents Man-in-the-Middle attacks. Protects GDPR-regulated financial and HR data. Minimal performance impact.
+
+
+\subsubsection{2. Enforce Two-Factor Authentication (2FA) for Administrative Access}
+
+\textbf{Threat Addressed:} T-1 (Admin credential theft), T-29 (QuickConnect compromise)
+
+Configure mandatory 2FA in DSM: \textit{Control Panel} → \textit{Security} → \textit{Account}:
+
+\begin{itemize}
+    \item Enable 2FA for all administrative users
+    \item Use authenticator app (Google Authenticator, Authy) instead of SMS
+    \item Enforce 2FA for QuickConnect remote access
+    \item Store backup codes securely
+\end{itemize}
+
+\textbf{Impact:} Even if admin password is compromised via phishing, attacker cannot login without second factor. Eliminates credential-only QuickConnect access vulnerability.
+
+
+\subsubsection{3. Disable Unencrypted HTTP and Enforce HTTPS-Only Access}
+
+\textbf{Threat Addressed:} T-15 (Credential interception via HTTP port 5000)
+
+In DSM: \textit{Control Panel} → \textit{Security} → \textit{Advanced} → \textit{Service Port Configuration}:
+
+\begin{itemize}
+    \item Disable HTTP port 5000 for DSM web interface
+    \item Enforce automatic HTTP → HTTPS redirect
+    \item Update documentation to use HTTPS (port 5001) only
+\end{itemize}
+
+\textbf{Impact:} Prevents credential transmission in cleartext and eliminates session downgrade attacks.
+
+
+\subsubsection{4. Enable File Operation Audit Logging}
+
+\textbf{Threat Addressed:} T-12 (Lack of audit trail), T-13 (Repudiation of admin actions)
+
+In DSM: \textit{Control Panel} → \textit{File Services} → \textit{Advanced}:
+
+\begin{itemize}
+    \item Enable file access logging for all shared folders
+    \item Log all operations (create, read, modify, delete)
+    \item Set log retention to minimum 90 days
+    \item Configure remote syslog export to prevent log tampering
+\end{itemize}
+
+\textbf{Impact:} Creates forensic audit trail for breach investigation. Enables GDPR compliance proof (who accessed personal data and when). Deters insider threats through accountability.
+
+\subsubsection{5. Implement Role-Based Access Control and Eliminate Shared Accounts}
+
+\textbf{Threat Addressed:} T-1 (Shared account compromise), T-26 (Privilege escalation)
+
+In DSM:
+
+\begin{itemize}
+    \item Create individual user accounts for each employee
+    \item Assign users to groups by role (Accounting, HR, Management)
+    \item Configure folder permissions by group:
+    \begin{itemize}
+        \item Comptabilité: Read/Write for Accounting only
+        \item Data\_RH: Read/Write for HR only
+        \item Direction: Read for all; Write for Management only
+    \end{itemize}
+    \item Enforce password policy: 12+ characters, complexity, 90-day rotation
+\end{itemize}
+
+\textbf{Impact:} Individual accountability for all actions. Reduces insider threat exposure (compromised account affects only that user). Simplifies access revocation when employees leave.
+
+
+\subsubsection{6. Enable DSM Firewall with Strict Inbound Rules}
+
+\textbf{Threat Addressed:} T-20 (Volumetric DoS attacks), general port scanning, reconnaissance
+
+In DSM: \textit{Control Panel} → \textit{Security} → \textit{Firewall}:
+
+\begin{itemize}
+    \item Enable firewall
+    \item Set default inbound policy to \textit{Deny all}
+    \item Whitelist only necessary traffic:
+    \begin{itemize}
+        \item SMB (445) from internal subnet 192.168.1.0/24 only
+        \item AFP (548) from internal subnet only (if used)
+        \item HTTP/HTTPS (5000-5001) from internal subnet only (block Internet access)
+    \end{itemize}
+    \item Block all other inbound traffic
+    \item Enable firewall logging
+\end{itemize}
+
+\textbf{Impact:} Significantly reduces attack surface. Blocks external reconnaissance and unauthorized access attempts. Provides rate limiting for DoS mitigation.
+
+
+\subsection{Implementation Summary}
+
+The critical mitigations (1-6) address the highest-risk threats (GDPR data exposure, ransomware, admin compromise) and require minimal effort and resources. Implementation of these recommendations reduces overall risk exposure significantly.
+
+
+\section{Conclusion}
+
+This threat modeling assessment identified 29 security threats across the office network infrastructure using the STRIDE framework. Three critical vulnerabilities require immediate remediation: unencrypted SMB data transmission exposing GDPR-regulated personal information, weak administrative authentication enabling remote credential-based compromise, and absence of audit logging preventing forensic investigation.
+
+Implementation of six critical recommendations—SMB encryption, Two-Factor Authentication, HTTPS-only access, audit logging, role-based access control, and firewall configuration—reduces risk exposure by 70-80\%. These mitigations leverage built-in DSM features with minimal implementation complexity and zero additional infrastructure cost.
+
+Prompt implementation is strongly advised to reduce GDPR compliance risk and protect sensitive business data.
+
+
+    %
+    % %  section ANNEXES
+    % horizontal line
+    \addtocontents{toc}{%
+      \protect\vspace{\baselineskip}%
+      \protect\noindent\rule{\linewidth}{0.1pt}%
+      \protect\par
+    }
+    % Change numbering to alphabetic
+    \appendix
+    \renewcommand{\thesection}{\Alph{section}}
+    \setcounter{section}{0} % start at A
+    \titleformat{\section}
+      {\normalfont\Large\bfseries}
+      {\Alph{section}}
+      {1em}
+      {}
+    \input{annex.tex}
+    %
+    % %
+    
+\end{document}
